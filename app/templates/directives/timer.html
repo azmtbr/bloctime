@@ -1,4 +1,8 @@
-<div class="homeController">
-	<div class="timer">{{remainingTime}}</div>
-	<button ng-click="start()">{{mainButtonLabel}}</button>
+	
+<div class="container">
+	<div class="timer-container">
+		<div class="timer">{{remainingTime}}</div>
+		<button class="btn btn-lg btn-success" ng-show="!timer.running" ng-click="start()">{{mainButtonLabel}}</button>
+		<button class="btn btn-lg btn-danger" ng-show="timer.running" ng-click="start()">{{mainButtonLabel}}</button>
+	</div>
 </div>

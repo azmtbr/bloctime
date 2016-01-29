@@ -1,0 +1,33 @@
+.container {
+	vertical-align: middle;
+	margin-top: 105px;
+}
+
+.title {
+	display: block;
+	font-size: 7rem;
+}
+
+.timer-container {
+	display: block;
+	border-radius: 25px;
+	padding: 15px;
+	background-color: darkgray;
+	margin: auto;
+	margin-top: 35px;
+	width: 40%;
+}
+
+.timer {
+	color: aliceblue;
+	font-size: 5rem;
+	display: block;
+	text-align: center;
+}
+
+.btn-lg {
+	display: block;
+	margin: auto;
+	margin-top: 15px;
+	width: 40%;
+}
