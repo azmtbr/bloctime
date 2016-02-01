@@ -11,6 +11,7 @@
 			scope.remainingBreakTime = TIMER.BREAK;
 			scope.workButtonLabel = "Start Work";
 			scope.breakButtonLabel = "Start Break";
+			scope.resetButtonLabel = "Reset Timer";
 			scope.onBreak = false;
 
 			var interval = null;
@@ -59,7 +60,6 @@
 
 						if (!scope.isRunning()){
 							interval = $interval(tickWork, 1000);
-							scope.workButtonLabel = "Reset";
 							scope.onBreak = false;
 						} else {
 							resetTimer();
@@ -75,7 +75,6 @@
 
 						if (!scope.isRunning()){
 							interval = $interval(tickBreak, 1000);
-							scope.breakButtonLabel = "Reset";
 							scope.onBreak = true;
 						} else {
 							resetTimer();
