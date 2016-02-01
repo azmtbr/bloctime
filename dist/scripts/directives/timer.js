@@ -11,66 +11,80 @@
 			scope.remainingBreakTime = TIMER.BREAK;
 			scope.workButtonLabel = "Start Work";
 			scope.breakButtonLabel = "Start Break";
-			scope.onBreak = true;
+			scope.onBreak = false;
+
 			var interval = null;
 
 			var tickWork = function() {
+
 				if (scope.remainingWorkTime > 0) {
 						scope.remainingWorkTime--;
-						scope.workButtonLabel = "Reset";
-						scope.running = true;
-						scope.onBreak = false;
 					} else {
+						resetTimer();
 						scope.onBreak = true;
 						scope.breakButtonLabel = "Start Break";
 						scope.remainingBreakTime = TIMER.BREAK;
-						scope.running = false;
 					}
+
+					scope.running = scope.isRunning();
+
 			};
 
 			var tickBreak = function() {
+
 				if (scope.remainingBreakTime > 0) {
 						scope.remainingBreakTime--;
-						scope.breakButtonLabel = "Reset";
-						scope.running = true;
-						scope.onBreak = true;
 					} else {
+						resetTimer();
 						scope.onBreak = false;
 						scope.workButtonLabel = "Start Work";
 						scope.remainingWorkTime = TIMER.WORK;
-						scope.running = false;
 					}
+
+					scope.running = scope.isRunning();
+
+			};
+
+			scope.isRunning = function(){
+				return interval !== null;
+			};
+
+			var resetTimer = function() {
+				$interval.cancel(interval);
+				interval = null;
+				scope.running = scope.isRunning();
 			};
 
 			scope.startWork = function() {
 
-						if (scope.workButtonLabel === "Start Work"){
+						if (!scope.isRunning()){
 							interval = $interval(tickWork, 1000);
+							scope.workButtonLabel = "Reset";
+							scope.onBreak = false;
 						} else {
-							$interval.cancel(interval);
-							interval = null;
+							resetTimer();
 							scope.workButtonLabel = "Start Work";
 							scope.remainingWorkTime = TIMER.WORK;
-							scope.running = false;
 							}
+							tickWork();
 						};
 
 
 
 			scope.startBreak = function() {
 
-						if (scope.breakButtonLabel === "Start Break"){
+						if (!scope.isRunning()){
 							interval = $interval(tickBreak, 1000);
+							scope.breakButtonLabel = "Reset";
+							scope.onBreak = true;
 						} else {
-							$interval.cancel(interval);
-							interval = null;
+							resetTimer();
 							scope.breakButtonLabel = "Start Break";
 							scope.remainingBreakTime = TIMER.BREAK;
-							scope.running = false;
 							}
+							tickBreak();
 						};
-
-			 }
+			 	}
 		};
 	}
 angular
