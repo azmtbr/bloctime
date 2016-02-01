@@ -5,7 +5,7 @@
 				enabled: true,
 				requireBase: false
 		});
-		
+
 		$stateProvider
 			.state('home', {
 				url: '/',
@@ -13,9 +13,13 @@
 				templateUrl: '/templates/home.html'
 			});
 	}
-	
-	
+
+
 	angular
 		.module('blocTime', ['ui.router', 'firebase'])
-		.config(config);
+		.config(config)
+				.constant("TIMER", {
+		 			"WORK": 5,
+		 			"BREAK": 3,
+	 			});
 })();

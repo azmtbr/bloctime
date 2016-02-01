@@ -1,8 +1,14 @@
-	
+
 <div class="container">
-	<div class="timer-container">
-		<div class="timer">{{remainingTime}}</div>
-		<button class="btn btn-lg btn-success" ng-show="!timer.running" ng-click="start()">{{mainButtonLabel}}</button>
-		<button class="btn btn-lg btn-danger" ng-show="timer.running" ng-click="start()">{{mainButtonLabel}}</button>
+	<div class="timer-container" ng-show="onBreak">
+		<h3 class="timer" ng-show="running">{{remainingBreakTime}}</h3>
+		<button class="btn btn-lg btn-success" ng-hide="running" ng-click="startBreak()">{{breakButtonLabel}}</button>
+		<button class="btn btn-lg btn-danger" ng-show="running" ng-click="startBreak()">{{breakButtonLabel}}</button>
+	</div>
+
+	<div class="timer-container" ng-hide="onBreak">
+		<h3 class="timer" ng-show="running">{{remainingWorkTime}}</h3>
+		<button class="btn btn-lg btn-success" ng-hide="running" ng-click="startWork()">{{workButtonLabel}}</button>
+		<button class="btn btn-lg btn-danger" ng-show="running" ng-click="startWork()">{{workButtonLabel}}</button>
 	</div>
 </div>
