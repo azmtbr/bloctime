@@ -21,5 +21,6 @@
 				.constant("TIMER", {
 		 			"WORK": 5,
 		 			"BREAK": 3,
+					"LONG_BREAK": 10
 	 			});
 })();
