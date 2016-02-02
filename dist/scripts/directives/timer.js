@@ -25,11 +25,24 @@
 				ding.play();
 			};
 
+			scope.$watch('remainingWorkTime', function (newVal, oldVal) {
+				if (!scope.remainingWorkTime > 0) {
+					playDing();
+				}
+			});
+
+			scope.$watch('remainingBreakTime', function (newVal, oldVal) {
+				if (!scope.remainingBreakTime > 0) {
+					playDing();
+				}
+			});
+
+
 			var tickWork = function() {
 				if (scope.remainingWorkTime > 0) {
 						scope.remainingWorkTime--;
 				}	else {
-					playDing();
+					// playDing();
 					workSessions++;
 					if (scope.metSessions()) {
 							scope.onLongBreak = true;
@@ -49,13 +62,13 @@
 				if (scope.remainingBreakTime > 0) {
 						scope.remainingBreakTime--;
 					} else if (scope.remainingBreakTime === 0 && scope.onLongBreak) {
-						playDing();
+						// playDing();
 						workSessions = 0;
 						scope.onLongBreak = false;
 						resetWorkTimer();
 						scope.onBreak = false;
 					} else {
-						playDing();
+						// playDing();
 						resetWorkTimer();
 						scope.onBreak = false;
 					}
