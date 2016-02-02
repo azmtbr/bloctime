@@ -13,6 +13,7 @@
 			scope.breakButtonLabel = "Start Break";
 			scope.resetButtonLabel = "Reset Timer";
 			scope.onBreak = false;
+			scope.running = false;
 
 			var interval = null;
 			var workSessions = 0;
@@ -21,9 +22,19 @@
 				preload: true
 			});
 
+			var pop = new buzz.sound( "/assets/sounds/pop.mp3", {
+				preload: true
+			});
+
 			var playDing = function() {
 				ding.play();
 			};
+
+			scope.$watch('running', function (newVal, oldVal) {
+				if (scope.running) {
+					pop.play();
+				}
+			});
 
 			scope.$watch('remainingWorkTime', function (newVal, oldVal) {
 				if (!scope.remainingWorkTime > 0) {
