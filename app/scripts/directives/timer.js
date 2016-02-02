@@ -17,11 +17,19 @@
 			var interval = null;
 			var workSessions = 0;
 
-			var tickWork = function() {
+			var ding = new buzz.sound( "/assets/sounds/ding.mp3", {
+				preload: true
+			});
 
+			var playDing = function() {
+				ding.play();
+			};
+
+			var tickWork = function() {
 				if (scope.remainingWorkTime > 0) {
 						scope.remainingWorkTime--;
 				}	else {
+					playDing();
 					workSessions++;
 					if (scope.metSessions()) {
 							scope.onLongBreak = true;
@@ -38,15 +46,16 @@
 			};
 
 			var tickBreak = function() {
-
 				if (scope.remainingBreakTime > 0) {
 						scope.remainingBreakTime--;
 					} else if (scope.remainingBreakTime === 0 && scope.onLongBreak) {
+						playDing();
 						workSessions = 0;
 						scope.onLongBreak = false;
 						resetWorkTimer();
 						scope.onBreak = false;
 					} else {
+						playDing();
 						resetWorkTimer();
 						scope.onBreak = false;
 					}
