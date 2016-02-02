@@ -19,8 +19,8 @@
 		.module('blocTime', ['ui.router', 'firebase'])
 		.config(config)
 				.constant("TIMER", {
-		 			"WORK": 5,
-		 			"BREAK": 3,
-					"LONG_BREAK": 10
+		 			"WORK": 3,
+		 			"BREAK": 2,
+					"LONG_BREAK": 100
 	 			});
 })();

@@ -1,14 +1,16 @@
 
 <div>
 	<div class="timer-container" ng-show="onBreak">
-		<h3 class="timer">{{remainingBreakTime}}</h3>
+		<h3 class="timer">{{remainingBreakTime | timecode}}</h3>
 		<button class="btn btn-lg btn-success" ng-hide="running" ng-click="startBreak()">{{breakButtonLabel}}</button>
 		<button class="btn btn-lg btn-danger" ng-show="running" ng-click="startBreak()">{{resetButtonLabel}}</button>
+		<b class="mode">Clear Your Mind</b>
 	</div>
 
 	<div class="timer-container" ng-hide="onBreak">
-		<h3 class="timer">{{remainingWorkTime}}</h3>
+		<h3 class="timer">{{remainingWorkTime | timecode}}</h3>
 		<button class="btn btn-lg btn-success" ng-hide="running" ng-click="startWork()">{{workButtonLabel}}</button>
 		<button class="btn btn-lg btn-danger" ng-show="running" ng-click="startWork()">{{resetButtonLabel}}</button>
+		<b class="mode">Always Be Productive</b>
 	</div>
 </div>
