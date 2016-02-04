@@ -1,6 +1,16 @@
-<div class="container">	
+<div class="container">
 	<h1 class="title text-center">{{title}}</h1>
 	<h4 class="title-follower text-center">{{titleFollower}}</h4>
 
 	<timer></timer>
+
+	<div class="sidebar">
+	  <h2>Tasks</h2>
+		<li ng-repeat="task in tasks">{{task.task}}</li>
+
+
+	    <input type="text" ng-model="task" placeholder="Type new task here" />
+	    <button class="btn btn-primary" ng-click="addTask()">{{taskButtonLabel}}</button>
+
+	</div>
 </div>
