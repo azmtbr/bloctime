@@ -15,9 +15,13 @@
 			scope.onBreak = false;
 			scope.running = false;
 
+
+
 			var interval = null;
 			var workSessions = 0;
 
+
+			//Sounds
 			var ding = new buzz.sound( "/assets/sounds/ding.mp3", {
 				preload: true
 			});
@@ -48,7 +52,7 @@
 				}
 			});
 
-
+			//Timer functions
 			var tickWork = function() {
 				if (scope.remainingWorkTime > 0) {
 						scope.remainingWorkTime--;
