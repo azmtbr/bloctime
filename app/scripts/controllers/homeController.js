@@ -21,5 +21,5 @@
 
 	angular
 		.module('blocTime')
-		.controller('homeController', ['Tasks', homeController]);
+		.controller('homeController', ['$scope', 'Tasks', homeController]);
 })();
