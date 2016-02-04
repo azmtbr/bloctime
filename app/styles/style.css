@@ -1,6 +1,13 @@
+html {
+	background-image: url(/assets/images/clock1.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
 .container {
 	vertical-align: middle;
 	margin-top: 105px;
+	float: right;
 }
 
 .title {
@@ -13,7 +20,7 @@
 	text-align: center;
 	border-radius: 25px;
 	padding: 15px;
-	background-color: darkgray;
+	background-color: rgba(153, 153, 153, 0.8);
 	margin: auto;
 	margin-top: 35px;
 	width: 40%;
@@ -38,4 +45,30 @@
 	padding-top: 15px;
 	color: white;
 	font: 1.5rem raleway, sans-serif;
+}
+
+.sidebar {
+	display: block;
+	float:left;
+	position: fixed;
+	top: 205px;
+	border-top-right-radius: 25px;
+	border-bottom-right-radius: 25px;
+	background: rgba(153, 153, 153, 0.8);
+}
+
+.form {
+	margin-bottom: 15px;
+}
+
+.task-text .btn-sm {
+	margin: 10px;
+}
+
+.task-text {
+	text-transform: capitalize;
+}
+
+.btn-sm {
+	margin-left: 10px;
 }

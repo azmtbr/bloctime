@@ -11,7 +11,8 @@
 
     $scope.addTask = function () {
       Tasks.all.$add({
-         task: $scope.task
+         task: $scope.task,
+				 created_at: Date.now()
        });
        $scope.task = null;
     };
