@@ -52,21 +52,23 @@
 				}
 			});
 
+			// scope.$watch('running', function (newVal, oldVal) {
+			// 	if (interval !== null) {
+			// 		scope.running = true;
+			// 	}
+			// })
+
 			//Timer functions
 			var tickWork = function() {
 				if (scope.remainingWorkTime > 0) {
 						scope.remainingWorkTime--;
 				}	else {
-					// playDing();
 					workSessions++;
 					if (scope.metSessions()) {
 							scope.onLongBreak = true;
-							resetBreakTimer();
-							scope.onBreak = true;
-					} else {
-						resetBreakTimer();
-						scope.onBreak = true;
 					}
+					scope.onBreak = true;
+					resetTimer();
 				}
 
 					scope.running = scope.isRunning();
@@ -76,16 +78,13 @@
 			var tickBreak = function() {
 				if (scope.remainingBreakTime > 0) {
 						scope.remainingBreakTime--;
-					} else if (scope.remainingBreakTime === 0 && scope.onLongBreak) {
-						// playDing();
-						workSessions = 0;
-						scope.onLongBreak = false;
-						resetWorkTimer();
-						scope.onBreak = false;
 					} else {
-						// playDing();
-						resetWorkTimer();
+						if (scope.remainingBreakTime === 0 && scope.onLongBreak) {
+							workSessions = 0;
+							scope.onLongBreak = false;
+						}
 						scope.onBreak = false;
+						resetTimer();
 					}
 
 					scope.running = scope.isRunning();
@@ -99,26 +98,25 @@
 			scope.isRunning = function(){
 				return interval !== null;
 			};
+			
 
-			var resetWorkTimer = function() {
-				$interval.cancel(interval);
-				interval = null;
-				scope.running = scope.isRunning();
-				scope.workButtonLabel = "Start Work";
-				scope.remainingWorkTime = TIMER.WORK;
-			};
 
-			var resetBreakTimer = function() {
-				if (scope.onLongBreak && scope.metSessions) {
+			var resetTimer = function() {
+				if (scope.onLongBreak) {
+					scope.breakButtonLabel = "Start Break";
 					scope.remainingBreakTime = TIMER.LONG_BREAK;
-				} else {
+				} else if (scope.onBreak) {
+					scope.breakButtonLabel = "Start Break";
 					scope.remainingBreakTime = TIMER.BREAK;
+				} else {
+					scope.workButtonLabel = "Start Work";
+					scope.remainingWorkTime = TIMER.WORK;
 				}
 
 				$interval.cancel(interval);
 				interval = null;
 				scope.running = scope.isRunning();
-				scope.breakButtonLabel = "Start Break";
+
 
 			};
 
@@ -128,7 +126,7 @@
 						scope.onBreak = false;
 						tickWork();
 					} else {
-						resetWorkTimer();
+						resetTimer();
 						}
 					};
 
@@ -139,7 +137,7 @@
 						scope.onBreak = true;
 						tickBreak();
 					} else {
-						resetBreakTimer();
+						resetTimer();
 						}
 					};
 			 }

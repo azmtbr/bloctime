@@ -3,7 +3,8 @@
 		$scope.title = "Timer";
 		$scope.titleFollower = "di Pomodoro";
 
-		$scope.taskButtonLabel = "Add New Task";
+		$scope.taskAddButton = "Add New Task";
+		$scope.taskRemoveButton = "Remove Task";
 
 
 		$scope.tasks = Tasks.all;
@@ -11,12 +12,13 @@
     $scope.addTask = function () {
       Tasks.all.$add({
          task: $scope.task
-
        });
-
        $scope.task = null;
-
     };
+
+		$scope.removeTask = function (task) {
+			$scope.tasks.$remove(task);
+		};
 	}
 
 	angular

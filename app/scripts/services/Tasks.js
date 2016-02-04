@@ -1,11 +1,8 @@
 (function() {
   function Tasks($firebaseArray) {
 
-    var ref = new Firebase('https://brilliant-heat-9132.firebaseio.com');
+    var ref = new Firebase('https://brilliant-heat-9132.firebaseio.com/tasks');
     var tasks = $firebaseArray(ref);
-
-
-    
 
     return {
       all: tasks,
