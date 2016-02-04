@@ -15,8 +15,6 @@
 			scope.onBreak = false;
 			scope.running = false;
 
-
-
 			var interval = null;
 			var workSessions = 0;
 
@@ -30,10 +28,6 @@
 				preload: true
 			});
 
-			var playDing = function() {
-				ding.play();
-			};
-
 			scope.$watch('running', function (newVal, oldVal) {
 				if (scope.running) {
 					pop.play();
@@ -42,17 +36,17 @@
 
 			scope.$watch('remainingWorkTime', function (newVal, oldVal) {
 				if (!scope.remainingWorkTime > 0) {
-					playDing();
+					ding.play();
 				}
 			});
 
 			scope.$watch('remainingBreakTime', function (newVal, oldVal) {
 				if (!scope.remainingBreakTime > 0) {
-					playDing();
+					ding.play();
 				}
 			});
 
-			// scope.$watch('running', function (newVal, oldVal) {
+			// scope.$watch('interval', function (newVal, oldVal) {
 			// 	if (interval !== null) {
 			// 		scope.running = true;
 			// 	}
@@ -98,7 +92,7 @@
 			scope.isRunning = function(){
 				return interval !== null;
 			};
-			
+
 
 
 			var resetTimer = function() {
@@ -121,7 +115,7 @@
 			};
 
 			scope.startWork = function() {
-					if (!scope.isRunning()){
+					if (!scope.isRunning()) {
 						interval = $interval(tickWork, 1000);
 						scope.onBreak = false;
 						tickWork();
@@ -132,7 +126,7 @@
 
 
 			scope.startBreak = function() {
-					if (!scope.isRunning()){
+					if (!scope.isRunning()) {
 						interval = $interval(tickBreak, 1000);
 						scope.onBreak = true;
 						tickBreak();
