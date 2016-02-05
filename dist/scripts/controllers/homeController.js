@@ -8,19 +8,36 @@
 
 
 		$scope.tasks = Tasks.all;
+		$scope.sessionsPerTask = 0;
 
     $scope.addTask = function () {
       Tasks.all.$add({
          task: $scope.task,
-				 created_at: Date.now()
+				 created_at: Date.now(),
+				 session_count: $scope.sessionsPerTask
        });
        $scope.task = null;
+			 $scope.sessionsPerTask = 0;
     };
 
 		$scope.removeTask = function (task) {
 			$scope.tasks.$remove(task);
 		};
-	}
+
+		//session counter
+
+		$scope.addSessionNumber = function (session_count) {
+			$scope.sessionsPerTask++;
+		};
+
+		$scope.subtractSessionNumber = function (session_count) {
+			$scope.sessionsPerTask--;
+			if ($scope.sessionsPerTask < 0) {
+				$scope.sessionsPerTask = 0;
+			}
+		};
+}
+
 
 	angular
 		.module('blocTime')

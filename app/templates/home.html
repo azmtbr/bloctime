@@ -7,15 +7,28 @@
 
 <div class="sidebar col-md-4">
   <h2 class="task-title">Tasks</h2>
-	<form class="form">
+	<form class="form" ng-submit="addTask()">
 		<ul class="list-group">
 			<li class="list-group-item" ng-repeat="task in tasks | orderBy: 'created_at':'reverse' "><span class="task-text">{{task.task}}</span>
 				<button type="button" class="btn btn-sm btn-danger" ng-click="removeTask(task)">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 			</li>
+
+				<div class="counter">
+					<label class="counter-label"># Of Work Sessions</label>
+        	<button type="button" class="btn btn-sm" ng-click="addSessionNumber()">
+						<span class="glyphicon glyphicon-hand-up"></span>
+					</button>
+						<span class="session-count">{{sessionsPerTask}}</span>
+        	<button type="button" class="btn btn-sm" ng-click="subtractSessionNumber()">
+						<span class="glyphicon glyphicon-hand-down"></span>
+					</button>
+				</div>
+
+
 		</ul>
     <input type="text" ng-model="task" class="form-control" placeholder="Type new task here" />
-    <button class="add-task-btn btn btn-primary" type="submit" ng-click="addTask()">{{taskAddButton}}</button>
+    <button type="button" class="add-task-btn btn btn-primary"  ng-click="addTask()">{{taskAddButton}}</button>
 	</form>
 </div>
