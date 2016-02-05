@@ -1,6 +1,6 @@
 {
   "firebase": "brilliant-heat-9132",
-  "public": "public",
+  "public": "app",
   "ignore": [
     "firebase.json",
     "**/.*",
