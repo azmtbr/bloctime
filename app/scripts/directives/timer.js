@@ -5,7 +5,9 @@
 			templateUrl: '/templates/directives/timer.html',
 			replace: true,
 			restrict: 'E',
-			scope: { },
+			scope: {
+				removed: '='
+						},
 			link: function (scope, interval, element, attrs){
 			scope.remainingWorkTime = TIMER.WORK;
 			scope.remainingBreakTime = TIMER.BREAK;
@@ -14,6 +16,7 @@
 			scope.resetButtonLabel = "Reset Timer";
 			scope.onBreak = false;
 			scope.running = false;
+			scope.sessionCounter = 0;
 
 			var interval = null;
 			var workSessions = 0;
@@ -46,11 +49,24 @@
 				}
 			});
 
+
 			// scope.$watch('interval', function (newVal, oldVal) {
 			// 	if (interval !== null) {
 			// 		scope.running = true;
 			// 	}
 			// })
+
+			//Counter functions
+			scope.resetCounter = function() {
+				scope.sessionCounter = 0;
+			};
+
+			// scope.$watch('removed', function (newVal, oldVal) {
+			// 	if ($scope.removed) {
+			// 		scope.sessionCounter = 0;
+			// 	}
+			// });
+
 
 			//Timer functions
 			var tickWork = function() {
@@ -58,6 +74,7 @@
 						scope.remainingWorkTime--;
 				}	else {
 					workSessions++;
+					scope.sessionCounter++;
 					if (scope.metSessions()) {
 							scope.onLongBreak = true;
 					}

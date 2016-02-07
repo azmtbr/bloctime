@@ -9,6 +9,7 @@
 
 		$scope.tasks = Tasks.all;
 		$scope.sessionsPerTask = 0;
+		// $scope.removed = false;
 
     $scope.addTask = function () {
       Tasks.all.$add({
@@ -22,20 +23,12 @@
 
 		$scope.removeTask = function (task) {
 			$scope.tasks.$remove(task);
+			// $scope.removed = true;
 		};
 
 		//session counter
 
-		$scope.addSessionNumber = function (session_count) {
-			$scope.sessionsPerTask++;
-		};
 
-		$scope.subtractSessionNumber = function (session_count) {
-			$scope.sessionsPerTask--;
-			if ($scope.sessionsPerTask < 0) {
-				$scope.sessionsPerTask = 0;
-			}
-		};
 }
 
 

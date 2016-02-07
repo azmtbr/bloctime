@@ -13,4 +13,9 @@
 		<button class="btn btn-lg btn-danger" ng-show="running" ng-click="startWork()">{{resetButtonLabel}}</button>
 		<b class="mode">Always Be Productive</b>
 	</div>
+
+	<div class="session-counter-container">
+		<h4 class="session-count">Work Session Count <span class="timer">{{sessionCounter}}</span></h4>
+		<button class="btn btn-med btn-danger" ng-click="resetCounter()">Reset</button>
+	</div>
 </div>
