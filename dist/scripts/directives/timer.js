@@ -18,7 +18,7 @@
 			scope.running = false;
 			scope.sessionCounter = 0;
 
-			var interval = null;
+			scope.interval = null;
 			var workSessions = 0;
 
 
@@ -50,11 +50,13 @@
 			});
 
 
-			// scope.$watch('interval', function (newVal, oldVal) {
-			// 	if (interval !== null) {
-			// 		scope.running = true;
-			// 	}
-			// })
+			 scope.$watch('interval', function (newVal, oldVal) {
+			 	if (newVal !== null) {
+			 		scope.running = true;
+			 	} else {
+			 		scope.running = false;
+        }
+			 });
 
 			//Counter functions
 			scope.resetCounter = function() {
@@ -81,9 +83,6 @@
 					scope.onBreak = true;
 					resetTimer();
 				}
-
-					scope.running = scope.isRunning();
-
 			};
 
 			var tickBreak = function() {
@@ -97,9 +96,6 @@
 						scope.onBreak = false;
 						resetTimer();
 					}
-
-					scope.running = scope.isRunning();
-
 			};
 
 			scope.metSessions = function(){
@@ -107,7 +103,7 @@
 			};
 
 			scope.isRunning = function(){
-				return interval !== null;
+				return scope.interval !== null;
 			};
 
 
@@ -124,16 +120,13 @@
 					scope.remainingWorkTime = TIMER.WORK;
 				}
 
-				$interval.cancel(interval);
-				interval = null;
-				scope.running = scope.isRunning();
-
-
+				$interval.cancel(scope.interval);
+				scope.interval = null;
 			};
 
 			scope.startWork = function() {
 					if (!scope.isRunning()) {
-						interval = $interval(tickWork, 1000);
+						scope.interval = $interval(tickWork, 1000);
 						scope.onBreak = false;
 						tickWork();
 					} else {
@@ -144,7 +137,7 @@
 
 			scope.startBreak = function() {
 					if (!scope.isRunning()) {
-						interval = $interval(tickBreak, 1000);
+						scope.interval = $interval(tickBreak, 1000);
 						scope.onBreak = true;
 						tickBreak();
 					} else {
