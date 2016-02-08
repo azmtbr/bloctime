@@ -14,8 +14,7 @@ module.exports = function(grunt) {
                     './app/assets/**/*.{png,jpg,jpeg,mp3}',
                     './app/scripts/**/*.js',
                     './app/styles/**/*.css',
-                    './app/pages/**/*.html',
-                    './app/templates/**/*.html',
+                    './app/**/*.html',
                     'Gruntfile.js'
                 ],
                 tasks: [
@@ -39,7 +38,7 @@ module.exports = function(grunt) {
                     expand: true,
                     src: [ './**/*.html' ],
                     dest: './dist',
-                    cwd: './app/pages'
+                    cwd: './app'
                 }, {
                     expand: true,
                     src: [ './**/*.css' ],

@@ -6,7 +6,7 @@
 			replace: true,
 			restrict: 'E',
 			scope: {
-				removed: '='
+				// removed: '='
 						},
 			link: function (scope, interval, element, attrs){
 			scope.remainingWorkTime = TIMER.WORK;
@@ -19,6 +19,7 @@
 			scope.interval = null;
 
 			scope.sessionCounter = 0;
+			scope.highCount = false;
 
 			var workSessions = 0;
 
@@ -50,6 +51,14 @@
 				}
 			});
 
+			scope.$watch('sessionCounter', function (newVal, oldVal) {
+				if (scope.sessionCounter > 4) {
+					scope.highCount = true;
+				} else {
+					scope.highCount = false;
+				}
+			});
+
 			scope.$watch('interval', function (newVal, oldVal) {
 				if (newVal !== null) {
 					scope.running = true;
@@ -58,13 +67,12 @@
 				}
 			})
 
-
 			//Counter functions
 			scope.resetCounter = function() {
 				scope.sessionCounter = 0;
 			};
 
-
+      scope.$on('taskRemoved', scope.resetCounter);
 
 			//Timer functions
 			var tickWork = function() {
@@ -73,6 +81,7 @@
 						return;
 				}
 				workSessions++;
+				scope.sessionCounter++;
 				if (scope.metSessions()) {
 						scope.onLongBreak = true;
 				}

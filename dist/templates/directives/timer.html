@@ -2,20 +2,38 @@
 <div>
 	<div class="timer-container" ng-show="onBreak">
 		<h3 class="timer">{{remainingBreakTime | timecode}}</h3>
+		<b class="mode">Clear Your Mind</b>
 		<button class="btn btn-lg btn-success" ng-hide="running" ng-click="startBreak()">{{breakButtonLabel}}</button>
 		<button class="btn btn-lg btn-danger" ng-show="running" ng-click="startBreak()">{{resetButtonLabel}}</button>
-		<b class="mode">Clear Your Mind</b>
 	</div>
 
 	<div class="timer-container" ng-hide="onBreak">
 		<h3 class="timer">{{remainingWorkTime | timecode}}</h3>
+		<b class="mode">Always Be Productive</b>
 		<button class="btn btn-lg btn-success" ng-hide="running" ng-click="startWork()">{{workButtonLabel}}</button>
 		<button class="btn btn-lg btn-danger" ng-show="running" ng-click="startWork()">{{resetButtonLabel}}</button>
-		<b class="mode">Always Be Productive</b>
 	</div>
 
 	<div class="session-counter-container">
-		<h4 class="session-count">Work Session Count <span class="timer">{{sessionCounter}}</span></h4>
+
+		<div ng-show="!highCount">
+			<div class="session-counter">
+				<h4 class="session-count-text">Pomodoros for current Task</h4>
+			</div>
+			<div class="session-counter-timer">
+				<span class="session-number">{{sessionCounter}}</span>
+			</div>
+		</div>
+
+		<div ng-show="highCount">
+			<div class="session-counter">
+				<h4 class="session-count-high">That's a lot of Pomodoros!</h4>
+			</div>
+			<div class="session-counter-timer">
+				<span class="session-number-high">{{sessionCounter}}</span>
+			</div>
+		</div>
+
 		<button class="btn btn-med btn-danger" ng-click="resetCounter()">Reset</button>
 	</div>
 </div>

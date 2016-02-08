@@ -6,16 +6,19 @@
 </div>
 
 <div class="sidebar col-md-4">
-  <h2 class="task-title">Tasks</h2>
 	<form class="form" ng-submit="addTask()">
 		<ul class="list-group">
 			<li class="list-group-item" ng-repeat="task in tasks | orderBy: 'created_at':'reverse' "><span class="task-text">{{task.task}}</span>
-				<button type="button" class="btn btn-sm btn-danger" ng-click="removeTask(task)">
+				<button type="button" class="btn btn-sm btn-link" ng-click="removeTask(task)">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 			</li>
 		</ul>
-    <input type="text" ng-model="task" class="form-control" placeholder="Type new task here" />
-    <button type="button" class="add-task-btn btn btn-primary"  ng-click="addTask()">{{taskAddButton}}</button>
+		<div class="task-input">
+			<input type="text" ng-model="task" class="form-control" placeholder="Type new task here" />
+		</div>
+		<div class="add-task-btn">
+			<button type="button" class="add-task-btn btn btn-primary"  ng-click="addTask()">{{taskAddButton}}</button>
+		</div>
 	</form>
 </div>
