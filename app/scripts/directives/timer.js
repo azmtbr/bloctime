@@ -14,10 +14,8 @@
 			scope.resetButtonLabel = "Reset Timer";
 			scope.onBreak = false;
 			scope.running = false;
-
-
-
-			var interval = null;
+			scope.interval = null;
+			
 			var workSessions = 0;
 
 
@@ -52,51 +50,43 @@
 				}
 			});
 
-			// scope.$watch('running', function (newVal, oldVal) {
-			// 	if (interval !== null) {
-			// 		scope.running = true;
-			// 	}
-			// })
+			scope.$watch('interval', function (newVal, oldVal) {
+				if (newVal !== null) {
+					scope.running = true;
+				} else {
+					scope.running = false;
+				}
+			})
 
 			//Timer functions
 			var tickWork = function() {
 				if (scope.remainingWorkTime > 0) {
 						scope.remainingWorkTime--;
-				}	else {
-					workSessions++;
-					if (scope.metSessions()) {
-							scope.onLongBreak = true;
-					}
-					scope.onBreak = true;
-					resetTimer();
+						return;
 				}
-
-					scope.running = scope.isRunning();
-
+				workSessions++;
+				if (scope.metSessions()) {
+						scope.onLongBreak = true;
+				}
+				scope.onBreak = true;
+				resetTimer();
 			};
 
 			var tickBreak = function() {
 				if (scope.remainingBreakTime > 0) {
 						scope.remainingBreakTime--;
-					} else {
-						if (scope.remainingBreakTime === 0 && scope.onLongBreak) {
-							workSessions = 0;
-							scope.onLongBreak = false;
-						}
-						scope.onBreak = false;
-						resetTimer();
-					}
-
-					scope.running = scope.isRunning();
-
+						return;
+				}
+				if (scope.remainingBreakTime === 0 && scope.onLongBreak) {
+						workSessions = 0;
+						scope.onLongBreak = false;
+				}
+				scope.onBreak = false;
+				resetTimer();
 			};
 
 			scope.metSessions = function(){
 				return workSessions > 3;
-			};
-
-			scope.isRunning = function(){
-				return interval !== null;
 			};
 
 
@@ -112,34 +102,31 @@
 					scope.remainingWorkTime = TIMER.WORK;
 				}
 
-				$interval.cancel(interval);
-				interval = null;
-				scope.running = scope.isRunning();
-
-
+				$interval.cancel(scope.interval);
+				scope.interval = null;
 			};
 
 			scope.startWork = function() {
-					if (!scope.isRunning()){
-						interval = $interval(tickWork, 1000);
-						scope.onBreak = false;
-						tickWork();
-					} else {
-						resetTimer();
-						}
-					};
+				if (!scope.running) {
+					scope.interval = $interval(tickWork, 1000);
+					scope.onBreak = false;
+					tickWork();
+				} else {
+					resetTimer();
+					}
+				};
 
 
 			scope.startBreak = function() {
-					if (!scope.isRunning()){
-						interval = $interval(tickBreak, 1000);
-						scope.onBreak = true;
-						tickBreak();
-					} else {
-						resetTimer();
-						}
-					};
-			 }
+				if (!scope.running) {
+					scope.interval = $interval(tickBreak, 1000);
+					scope.onBreak = true;
+					tickBreak();
+				} else {
+					resetTimer();
+					}
+				};
+			}
 		};
 	}
 angular
