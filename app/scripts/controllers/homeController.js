@@ -8,18 +8,29 @@
 
 
 		$scope.tasks = Tasks.all;
+		$scope.sessionsPerTask = 0;
+		// $scope.removed = false;
 
     $scope.addTask = function () {
       Tasks.all.$add({
-         task: $scope.task
+         task: $scope.task,
+				 created_at: Date.now(),
+				 session_count: $scope.sessionsPerTask
        });
        $scope.task = null;
+			 $scope.sessionsPerTask = 0;
     };
 
 		$scope.removeTask = function (task) {
 			$scope.tasks.$remove(task);
+			// $scope.removed = true;
 		};
-	}
+
+		//session counter
+
+
+}
+
 
 	angular
 		.module('blocTime')

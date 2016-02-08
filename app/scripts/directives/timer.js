@@ -5,7 +5,9 @@
 			templateUrl: '/templates/directives/timer.html',
 			replace: true,
 			restrict: 'E',
-			scope: { },
+			scope: {
+				removed: '='
+						},
 			link: function (scope, interval, element, attrs){
 			scope.remainingWorkTime = TIMER.WORK;
 			scope.remainingBreakTime = TIMER.BREAK;
@@ -15,7 +17,9 @@
 			scope.onBreak = false;
 			scope.running = false;
 			scope.interval = null;
-			
+
+			scope.sessionCounter = 0;
+
 			var workSessions = 0;
 
 
@@ -28,10 +32,6 @@
 				preload: true
 			});
 
-			var playDing = function() {
-				ding.play();
-			};
-
 			scope.$watch('running', function (newVal, oldVal) {
 				if (scope.running) {
 					pop.play();
@@ -40,13 +40,13 @@
 
 			scope.$watch('remainingWorkTime', function (newVal, oldVal) {
 				if (!scope.remainingWorkTime > 0) {
-					playDing();
+					ding.play();
 				}
 			});
 
 			scope.$watch('remainingBreakTime', function (newVal, oldVal) {
 				if (!scope.remainingBreakTime > 0) {
-					playDing();
+					ding.play();
 				}
 			});
 
@@ -57,6 +57,14 @@
 					scope.running = false;
 				}
 			})
+
+
+			//Counter functions
+			scope.resetCounter = function() {
+				scope.sessionCounter = 0;
+			};
+
+
 
 			//Timer functions
 			var tickWork = function() {
@@ -88,6 +96,7 @@
 			scope.metSessions = function(){
 				return workSessions > 3;
 			};
+
 
 
 			var resetTimer = function() {
