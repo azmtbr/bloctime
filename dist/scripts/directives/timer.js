@@ -57,6 +57,10 @@
 				} else {
 					scope.highCount = false;
 				}
+
+				if (scope.sessionCounter > 0) {
+					scope.showCounterReset = true;
+				}
 			});
 
 			scope.$watch('interval', function (newVal, oldVal) {
@@ -70,7 +74,9 @@
 			//Counter functions
 			scope.resetCounter = function() {
 				scope.sessionCounter = 0;
+				scope.showCounterReset = false;
 			};
+
 
       scope.$on('taskRemoved', scope.resetCounter);
 
