@@ -1,12 +1,16 @@
-<div class="container col-md-8">
+<div class="container col-md-12">
 	<h1 class="title text-center">{{title}}</h1>
 	<h4 class="title-follower text-center">{{titleFollower}}</h4>
 
 	<timer></timer>
 </div>
 
-<div class="sidebar col-md-4">
-	<form class="form" ng-submit="addTask()">
+<div class="sidebar col-md-2">
+	<button type="button" class="btn task-toggle-button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+		<span class="task-menu-text">Tasks</span>
+		<span class="glyphicon glyphicon-menu-hamburger"></span>
+	</button>
+	<form class="form collapse" id="collapse" ng-submit="addTask()">
 		<ul class="list-group">
 			<li class="list-group-item" ng-repeat="task in tasks | orderBy: 'created_at':'reverse' "><span class="task-text">{{task.task}}</span>
 				<button type="button" class="btn btn-sm btn-link" ng-click="removeTask(task)">
@@ -20,5 +24,12 @@
 		<div class="add-task-btn">
 			<button type="button" class="add-task-btn btn btn-primary"  ng-click="addTask()">{{taskAddButton}}</button>
 		</div>
+
+		<div class="counter-reset-toggle">
+			<span class="counter-reset-text">Turn Counter Auto Reset</span>
+			<button type="button" class="counter-toggle-button btn btn-sm" ng-show="autoRemove" ng-click="changeAutoRemove()">Off</button>
+			<button type="button" class="counter-toggle-button btn btn-sm" ng-hide="autoRemove" ng-click="changeAutoRemove()">On</button>
+		</div>
+
 	</form>
 </div>

@@ -4,6 +4,7 @@
 		$scope.titleFollower = "di Pomodoro";
 
 		$scope.taskAddButton = "Add";
+		$scope.autoRemove = true;
 
 		$scope.tasks = Tasks.all;
 
@@ -17,16 +18,16 @@
 
 		$scope.removeTask = function (task) {
 			$scope.tasks.$remove(task);
-			if ($scope.autoRemove = true) {
+			if ($scope.autoRemove === true) {
 			$scope.$broadcast('taskRemoved')
 			}
 		};
 
 		$scope.changeAutoRemove = function() {
-			if ($scope.autoRemove = true) {
-				$scope.autoRemove = false;
-			} else {
+			if ($scope.autoRemove === false) {
 				$scope.autoRemove = true;
+			} else {
+				$scope.autoRemove = false;
 			}
 		};
 }
